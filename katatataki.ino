@@ -3,8 +3,6 @@
 
 #include "wifi_config.h"
 
-#define LED_PIN 5
-
 ESP8266WebServer server(80);
 
 void handleRoot() {
@@ -36,20 +34,13 @@ void handleNotFound() {
 void setup(void) {
   Serial.begin(115200);
 
-  pinMode(LED_PIN, OUTPUT);
-
   // WiFi.config(IPAddress(192,168,1,60),IPAddress(192,168,1,1),IPAddress(255,255,255,0));
   WiFi.begin(ssid, passwd);
   Serial.println("");
 
   while (WiFi.status() != WL_CONNECTED) {
-    digitalWrite(LED_PIN, HIGH);
-    delay(250);
-
-    digitalWrite(LED_PIN, LOW);
-    delay(250);
-
     Serial.print(".");
+    delay(500);
   }
   Serial.println("");
   Serial.print("Connected to ");
@@ -63,8 +54,6 @@ void setup(void) {
 
   server.begin();
   Serial.println("HTTP server started");
-  
-  digitalWrite(LED_PIN, HIGH);
 }
 
 void loop(void) {
