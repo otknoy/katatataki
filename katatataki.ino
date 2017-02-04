@@ -37,7 +37,6 @@ void setup(void) {
   Serial.begin(115200);
 
   pinMode(LED_PIN, OUTPUT);
-  initTapShoulder();
 
   // WiFi.config(IPAddress(192,168,1,60),IPAddress(192,168,1,1),IPAddress(255,255,255,0));
   WiFi.begin(ssid, passwd);

@@ -1,12 +1,4 @@
-#include <Servo.h>
-
-#define SERVO_PIN 15
-
-Servo servo;
-
-void initTapShoulder() {
-  servo.attach(SERVO_PIN);
-}
+ShoulderTapper shoulderTapper;
 
 void handleTapShoulder() {
   if (server.method() != HTTP_GET) {
@@ -14,18 +6,19 @@ void handleTapShoulder() {
     return;
   }
 
-  digitalWrite(LED_PIN, LOW);
-  servo.write(0);
-  delay(250);
+  String power = server.arg("power");
 
-  digitalWrite(LED_PIN, HIGH);
-  servo.write(90);
-  delay(250);
-
-  /* digitalWrite(LED_PIN, LOW); */
-  /* servo.write(0); */
-
-  server.send(200, "text/plain", "success");
+  if (power == "1") {
+    shoulderTapper.tap(256);
+    server.send(200, "text/plain", "success");
+  } else if (power == "2") {
+    shoulderTapper.tap(512);
+    server.send(200, "text/plain", "success");
+  } else if (power == "3") {
+    shoulderTapper.tap(1024);
+    server.send(200, "text/plain", "success");
+  } else {
+    server.send(400, "text/plain", "invalid parameter");
+    return;
+  }
 }
-
-
