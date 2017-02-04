@@ -5,32 +5,6 @@
 
 ESP8266WebServer server(80);
 
-void handleRoot() {
-  String s = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"></head><body>";
-  s = s + "<p>ssid: " + ssid + "</p>";
-  s = s + "<p>: " + ssid + "</p>";
-  s = s + "<p>IP address: " + WiFi.localIP() + "</p>";
-  s = s + "</body></html>";
-
-  server.send(200, "text/html", s);
-}
-
-void handleNotFound() {
-  String message = "File Not Found\n\n";
-  message += "URI: ";
-  message += server.uri();
-  message += "\nMethod: ";
-  message += (server.method() == HTTP_GET) ? "GET" : "POST";
-  message += "\nArguments: ";
-  message += server.args();
-  message += "\n";
-  for (uint8_t i = 0; i < server.args(); i++) {
-    message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
-  }
-
-  server.send(404, "text/plain", "message");
-}
-
 void setup(void) {
   Serial.begin(115200);
 
@@ -48,9 +22,33 @@ void setup(void) {
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 
-  server.on("/", handleRoot);
+  server.on("/", []() {
+      String s = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"></head><body>";
+      s = s + "<p>ssid: " + ssid + "</p>";
+      s = s + "<p>: " + ssid + "</p>";
+      s = s + "<p>IP address: " + WiFi.localIP() + "</p>";
+      s = s + "</body></html>";
+
+      server.send(200, "text/html", s);
+    });
+
   server.on("/tapShoulder", handleTapShoulder);
-  server.onNotFound(handleNotFound);
+
+  server.onNotFound([]() {
+      String message = "File Not Found\n\n";
+      message += "URI: ";
+      message += server.uri();
+      message += "\nMethod: ";
+      message += (server.method() == HTTP_GET) ? "GET" : "POST";
+      message += "\nArguments: ";
+      message += server.args();
+      message += "\n";
+      for (uint8_t i = 0; i < server.args(); i++) {
+	message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
+      }
+
+      server.send(404, "text/plain", "message");
+    });
 
   server.begin();
   Serial.println("HTTP server started");
