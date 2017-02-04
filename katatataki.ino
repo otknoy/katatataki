@@ -33,8 +33,8 @@ void setup(void) {
     });
 
   server.on("/tapShoulder", handleTapShoulder);
-  server.on("/leftShoulderLed",  handleLeftShoulderLed);
-  server.on("/rightShoulderLed", handleRightShoulderLed);
+  server.on("/shoulder/right/blink", handleRightShoulderLed);
+  server.on("/shoulder/left/blink", handleLeftShoulderLed);
 
   server.onNotFound([]() {
       String message = "File Not Found\n\n";

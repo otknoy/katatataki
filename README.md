@@ -16,3 +16,9 @@ http://{api.host}:80/sholder/tap?power=1
   - 程よくたたく
 - power=3
   - はやくたたく
+
+## 肩を光らせる
+
+http://{api.host}:80/shoulder/right/blink
+
+http://{api.host}:80/shoulder/left/blink
