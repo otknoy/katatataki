@@ -27,8 +27,8 @@ void handleTapShoulder() {
 }
 
 
-Led rightLed(1);
-Led leftLed(2);
+Led rightLed(2);
+Led leftLed(15);
 
 void handleRightShoulderLed()
 {
