@@ -39,6 +39,6 @@ void handleRightShoulderLed()
 void handleLeftShoulderLed()
 {
   leftLed.blink();
-  String power = server.arg("power");
-  return;
+
+  server.send(200, "text/plain", "success");
 }
