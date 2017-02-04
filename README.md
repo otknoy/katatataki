@@ -6,7 +6,7 @@
 
 ## 肩をたたく
 
-http://{api.host}:80/sholder/tap?power=1
+http://{api.host}:80/shoulder/tap?power=1
 
 - power=0
   - 止める
