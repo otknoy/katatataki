@@ -11,6 +11,7 @@ private:
 
 public:
   ShoulderTapper();
+
   void tap(const int power);
 };
 
