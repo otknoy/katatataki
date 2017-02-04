@@ -8,7 +8,10 @@ void handleTapShoulder() {
 
   String power = server.arg("power");
 
-  if (power == "1") {
+  if (power == "0") {
+    shoulderTapper.tap(0);
+    server.send(200, "text/plain", "success");
+  } else if (power == "1") {
     shoulderTapper.tap(256);
     server.send(200, "text/plain", "success");
   } else if (power == "2") {
