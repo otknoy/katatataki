@@ -25,3 +25,20 @@ void handleTapShoulder() {
     return;
   }
 }
+
+
+Led rightLed(1);
+Led leftLed(2);
+
+void handleRightShoulderLed()
+{
+  rightLed.blink();
+  server.send(200, "text/plain", "success");
+}
+
+void handleLeftShoulderLed()
+{
+  leftLed.blink();
+  String power = server.arg("power");
+  return;
+}
