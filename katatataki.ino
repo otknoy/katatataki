@@ -32,7 +32,9 @@ void setup(void) {
       server.send(200, "text/html", s);
     });
 
-  server.on("/tapShoulder", handleTapShoulder);
+  server.on("/shoulder/tap", handleTapShoulder);
+  server.on("/shoulder/right/blink", handleRightShoulderLed);
+  server.on("/shoulder/left/blink", handleLeftShoulderLed);
 
   server.onNotFound([]() {
       String message = "File Not Found\n\n";
