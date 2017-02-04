@@ -16,14 +16,14 @@ void handleTapShoulder() {
 
   digitalWrite(LED_PIN, LOW);
   servo.write(0);
-  delay(100);
+  delay(250);
 
   digitalWrite(LED_PIN, HIGH);
   servo.write(90);
-  delay(100);
+  delay(250);
 
-  digitalWrite(LED_PIN, LOW);
-  servo.write(0);
+  /* digitalWrite(LED_PIN, LOW); */
+  /* servo.write(0); */
 
   server.send(200, "text/plain", "success");
 }
